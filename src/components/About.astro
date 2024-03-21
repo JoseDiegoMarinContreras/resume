@@ -1,0 +1,29 @@
+---
+import { Image } from 'astro:assets';
+import profileImage from '../assets/profile-image.jpeg';
+---
+
+<div class="container rounded-md p-8 flex flex-row content-center items-center">
+    <Image class="rounded-full"
+        alt="Profile Photo"
+        src={profileImage}
+        width={200}
+    />
+
+    <p class="mx-8 text-base text-justify">
+        I am Jose Diego, a fullstack Developer with 4 years of experience in
+        the TI sector. Currently I’m at Luxoft. as a service developer In this
+        role, I am involved in full-stack development, utilizing my expertise
+        in backend technologies, such as NestJS, Node.js, and TypeScript. I
+        follow Agile methodologies to ensure efficient project management. My
+        responsibilities include analyzing algorithms, developing
+        microservices, and working with monorepos and Bitbucket for version
+        control. Additionally, I have experience in frontend development using
+        React and React Native, both with TypeScript. In my previous position
+        at a Nayarit government dependency, I specialized in designing, coding,
+        and implementing stand-alone web applications. I successfully resolved
+        bottlenecks and improved system performance. Furthermore, I
+        collaborated closely with the infrastructure team to handle deployments
+        effectively.
+    </p>
+</div>
