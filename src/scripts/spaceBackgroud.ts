@@ -72,7 +72,7 @@ export default function spaceBackground(component: Element) {
 
     const vertices = [];
     const velocity : Array<number> = [];
-    let acceleration = 0.002;
+    let acceleration = 0.1;
     for(let i = 0; i < 6000; i++) {
         vertices.push(
             Math.random() * 600 - 300,
@@ -93,7 +93,7 @@ export default function spaceBackground(component: Element) {
         for(let i = 0; i < positionAttrs.count; i++) {
             let y = positionAttrs.getY(i);
             velocity[i] += acceleration;
-            y -= velocity[i];
+            y -= acceleration;
             if(y < -200) {
                 y = 200;
                 velocity[i] = 0;
