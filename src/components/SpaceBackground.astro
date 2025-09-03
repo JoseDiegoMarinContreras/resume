@@ -1,0 +1,22 @@
+<div class="w-full h-full space-background"></div>
+
+<slot />
+
+<script>
+    import spaceBacground from '../scripts/spaceBackgroud';
+
+    const component = document.getElementsByClassName('space-background').item(0)!;
+
+    spaceBacground(component);
+</script>
+
+<style>
+    .space-background {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        z-index: -9999;
+    }
+</style>

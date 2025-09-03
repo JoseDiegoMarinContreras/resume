@@ -1,10 +1,23 @@
 ---
 import Layout from '@layouts/Layout.astro';
-import About from '@components/About.astro';
+import SpaceBackground from '@components/SpaceBackground.astro';
+import Card from '@components/Card.astro';
+import Button from '@components/Button.astro';
 ---
 
 <Layout title="Welcome to My Portfolio.">
-	<main>
-		<About />
-	</main>
+	<SpaceBackground />
+
+	<div class="flex items-center justify-center h-screen">
+  		<Card>
+			<Button href="/portfolio-web/interactive" type="secondary">
+				Interactive Mode
+			</Button>
+
+			<Button href="/portfolio-web/classic" class="mt-4" type="secondary">
+				Classic Mode
+			</Button>
+		</Card>
+</div>
+
 </Layout>
