@@ -57,7 +57,7 @@ export default function spaceBackground(component: Element) {
     const camera = new THREE.PerspectiveCamera(60, aspect, 1, 1000);
     const starGeo = new THREE.BufferGeometry();
     const renderer = new THREE.WebGLRenderer();
-    const sprite = new THREE.TextureLoader().load('/portfolio-web/star-dot.png');
+    const sprite = new THREE.TextureLoader().load('/resume/star-dot.png');
     const starMaterial = new THREE.PointsMaterial({
         color: 0xAAAAAA,
         size: 0.7,

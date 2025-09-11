@@ -3,13 +3,14 @@ interface Props {
     class?: string;
 	type?: 'primary' | 'secondary';
     href?: string;
+    download?: string
 }
 
-const { type, class: className, href, } = Astro.props;
+const { type, class: className, href, download, } = Astro.props;
 ---
 {
     href? (
-        <a href={href} class:list={['btn', `btn-${type || 'primary'}`, className]}>
+        <a href={href} download={download} class:list={['btn', `btn-${type || 'primary'}`, className]}>
 <slot />
 </a>
     ) : (
