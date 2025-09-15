@@ -1,5 +1,5 @@
 ---
-const lang = navigator.language.startsWith('es') ? 'es' : 'en';
+const lang = navigator?.language?.startsWith('es') ? 'es' : 'en';
 
 return Astro.redirect(`/resume/${lang}`);
 ---
