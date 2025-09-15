@@ -1,0 +1,16 @@
+---
+import Card from "./Card.astro";
+
+const contactInfo = [
+    { property: 'Email', value: 'diegomai1995@hotmail.com', href: 'mailto:diegomai1995@hotmail.com' },
+    { property: 'Linkedin', value: 'Jose Diego Marin Contreras', href: 'https://www.linkedin.com/in/jose-diego-marin-contreras/' },
+    { property: 'GitHub', value: 'JoseDiegoMarinContreras', href: 'http://github.com/JoseDiegoMarinContreras' },
+];
+---
+<Card>
+    {
+        contactInfo.map(item => (
+            <p><strong>{item.property}: </strong><a target="_blank" href={item.href}>{item.value}</a></p>
+        ))
+    }
+</Card>

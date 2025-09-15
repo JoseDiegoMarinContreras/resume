@@ -1,0 +1,20 @@
+---
+import Card from "./Card.astro";
+
+const projects = [
+    { title: 'Location Indoor for schools', description: '', file: '', url: '', },
+    { title: 'Centro GEO', description: '', file: '', url: '', },
+    { title: 'GitHub', description: '', file: '', url: '', },
+];
+---
+{
+    projects.map(item => (
+        <div class="my-5">
+            <Card>
+                <h4>{ item.title }</h4>
+            
+                <p>{ item.description }</p>
+            </Card>
+        </div>
+    ))
+}
