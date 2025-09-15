@@ -1,8 +1,10 @@
 ---
-let defaultLang = 'en';
-if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
-    defaultLang = navigator.language.substring(0, 2);
-}
-
-return Astro.redirect(`/resume/${defaultLang}`);
 ---
+<script>
+import { languages } from "@utils/constants";
+
+let userLang = navigator.language.substring(0, 2);
+let language = languages.includes(userLang) ? userLang : 'en';
+    
+window.location.replace(`/resume/${language}`);
+</script>
