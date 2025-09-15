@@ -102,7 +102,7 @@ const sectionMapper: Record<string, any> = {
     idSections.forEach(section => {
         document.getElementById(`nav-item-${section}`)?.addEventListener('click', () => {
             const top = document.getElementById(section)?.getBoundingClientRect().top;
-            console.log(100, top, window.scrollY, 100 - top + window.scrollY);
+            
             window.scrollTo({ 
                 top: top - 100 + window.scrollY, 
                 behavior: "smooth" 
