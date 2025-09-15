@@ -1,0 +1,27 @@
+---
+import Card from "./Card.astro";
+
+const certifications = [
+    { company: 'Red Hat', title: 'RED HAT CERTIFIED SPECIALIST IN CONTAINERS AND KUBERNETES', expedition: 'April 2022'  },
+    { company: 'Microsoft', title: 'Microsoft Certified: Azure Fundamentals', expedition: 'June 2021'  },
+    { company: 'Linux Professional Institute (LPI)', title: 'Linux Professional Institute Linux Essentials', expedition: 'March 2021'  },
+    { company: 'Amazon Web Service (AWS)', title: 'AWS Certified Cloud Practitioner', expedition: 'December 2020'  },
+];
+---
+{
+    certifications.map(item => (
+        <div class="my-5">
+            <Card>
+            <div class="flex flex-col">
+                <div class="flex flex-row mb-3">
+                    { item.company }
+                
+                    <span class="ml-auto">{ item.expedition }</span>
+                </div>
+            
+                { item.title }
+            </div>
+        </Card>
+        </div>
+    ))
+}

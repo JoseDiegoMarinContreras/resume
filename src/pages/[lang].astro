@@ -1,0 +1,171 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { languages, } from '@utils/constants';
+import CvLead from "@components/CvLead.astro";
+import SpaceBackground from "@components/SpaceBackground.astro";
+import About from "@components/About.astro";
+import Experience from "@components/Experience.astro";
+import Projects from "@components/Projects.astro";
+import Certifications from "@components/Certifications.astro";
+import Contact from "@components/Contact.astro";
+import { getEntry } from "astro:content";
+
+export function getStaticPaths() {
+    return languages.map((l) => ({ params: { lang: l, }, }));
+}
+
+const { lang, } = Astro.params;
+
+const sections = (await getEntry('section', lang))!.data.sections;
+
+const sectionMapper: Record<string, any> = {
+    about: About,
+    experience: Experience,
+    projects: Projects,
+    certifications: Certifications,
+    contact: Contact,
+};
+---
+<Layout title="Jose Diego Marin Contreras">
+    <div>
+        <header>
+            <ul>
+                {
+                    sections.map((section) => (
+                        <li id={`nav-item-${section.id}`}>{ section.name }</li>
+                    ))
+                }
+            </ul>
+        </header>
+
+        <SpaceBackground />
+
+        <main class="pt-5">
+            <div class="content">
+                <CvLead />
+
+                {
+                    sections.map((section) => {
+                        const SectionComponent = sectionMapper[section.id];
+
+                        return (
+                            <div id={section.id} class={`section ${section.id}`}>
+                                <h2 class="section-title">{ section.name }</h2>
+                                
+                                <SectionComponent />
+                            </div>
+                        );
+                    })
+                }
+            </div>
+        </main>
+    </div>
+</Layout>
+
+<script is:inline define:vars={{ sections }}>
+    const idSections = sections.map(section => section.id);
+
+    let activeSection = {
+        sectionId: '',
+        intersectionRation: 0,
+    };
+
+    const observer = new IntersectionObserver(entries => {
+        const section = entries.filter(entry => {
+            if(!entry.isIntersecting && entry.target.id === activeSection.sectionId) {
+                activeSection.intersectionRation = 0;
+            }
+            return entry.isIntersecting;
+        }).sort((entryA, entryB) => entryA.intersectionRatio - entryB.intersectionRatio)
+          .at(0);
+
+        if(!section || section.target.id === activeSection.sectionId || section.intersectionRatio < activeSection.intersectionRation) {
+            return;
+        }
+
+        requestAnimationFrame(() => {
+            document.getElementById(`nav-item-${activeSection.sectionId}`)?.classList.remove('active-section');
+            activeSection = { sectionId: section.target.id, intersectionRation: section.intersectionRatio, };
+            document.getElementById(`nav-item-${activeSection.sectionId}`)?.classList.add('active-section');
+        });
+    },{
+        root: null,
+        rootMargin: '-96px 0px 0px 0px',
+        threshold: [0.5, 0.6, 0.7, 0.8, 0.9, 1],
+    });
+
+    idSections.forEach(section => {
+        const el = document.getElementById(section);
+        el && observer.observe(el);
+    });
+
+    idSections.forEach(section => {
+        document.getElementById(`nav-item-${section}`)?.addEventListener('click', () => {
+            const top = document.getElementById(section)?.getBoundingClientRect().top;
+            console.log(100, top, window.scrollY, 100 - top + window.scrollY);
+            window.scrollTo({ 
+                top: top - 100 + window.scrollY, 
+                behavior: "smooth" 
+            });
+        });
+    });
+</script>
+
+<style>
+    header {
+        position: sticky;
+        top: 0;
+        background-color: #0F111A;
+        display: flex;
+        justify-content: center;
+        z-index: 9999;
+
+        ul {
+            display: flex;
+            flex-direction: row;
+            width: 80%;
+
+            li {
+                flex-grow: 1;
+                font-size: 1.25rem;
+                text-align: center; 
+                padding: 2rem;
+                font-weight: 600;
+                cursor: pointer;
+            }
+
+            li.active-section {
+                background-color: var(--primary);
+            }
+
+            li:hover {
+                background-color: var(--primary);
+            }
+        }
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .content {
+            max-width: 75vw;
+
+            .personal-profile {
+                margin-top: 4rem;
+            }
+        }
+    }
+
+    .section {
+        margin-bottom: 0.8rem;
+
+        .section-title {
+            color: #51AEF3;
+            font-size: large;
+            font-weight: 200;
+            margin-bottom: 0.5rem;
+        }
+    }
+</style>

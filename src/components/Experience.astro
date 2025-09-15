@@ -1,0 +1,26 @@
+---
+import Card from "./Card.astro";
+
+const experience = [
+    { company: 'O\'Reilly Auto Parts', role: 'Full-Stack Developer', duration: 'May 2024 - Present' },
+    { company: 'Luxoft Mexico', role: 'Full-Stack Developer', duration: 'Jun 2022 - Mar 2024' },
+    { company: 'IBM México', role: 'System Administrator', duration: '2020 - 2021' },
+];
+---         
+{
+    experience.map(item => (
+        <div class="my-5">
+            <Card>
+            <div class="flex flex-col">
+                <div class="flex flex-row mb-3">
+                    { item.company }
+                
+                    <span class="ml-auto">{ item.duration }</span>
+                </div>
+            
+                { item.role }
+            </div>
+        </Card>
+        </div>
+    ))
+}
