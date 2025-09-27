@@ -30,8 +30,16 @@ const resume = defineCollection({
     }),
 });
 
+const about = defineCollection({
+    loader: _glob('about'),
+    schema: z.object({
+        summary: z.string()
+    }),
+});
+
 export const collections = {
     section,
     info,
     resume,
+    about,
 };

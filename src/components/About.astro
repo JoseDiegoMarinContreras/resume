@@ -1,18 +1,12 @@
 ---
+import { getEntry } from "astro:content";
 import Card from "./Card.astro"
+
+const { lang, } = Astro.params;
+
+const resume = await getEntry('about', lang as string);
+const { summary } = resume?.data!;
 ---
 <Card>          
-    <p>
-        I am Jose Diego, a fullstack Developer with 5 years of experience in the TI sector.
-        Currently I’m at Luxoft. as a service developer In this role, I am involved in
-        fullstack development, utilizing my expertise in backend technologies, such as NestJS,
-        Node.js, and TypeScript. I follow Agile methodologies to ensure efficient project management.
-        My responsibilities include analyzing algorithms, developing microservices, and working with
-        monorepos and Bitbucket for version control. Additionally, I have experience in frontend
-        development using React and React Native, both with TypeScript. In my previous position at a
-        Nayarit government dependency, I specialized in designing, coding, and implementing stand-alone
-        web applications. I successfully resolved bottlenecks and improved system performance.
-        Furthermore, I collaborated closely with the infrastructure team to handle deployments
-        effectively.
-    </p>
+    <p>{ summary }</p>
 </Card>
